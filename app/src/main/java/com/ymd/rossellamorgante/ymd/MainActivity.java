@@ -14,11 +14,12 @@ import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.core.view.MenuItemCompat;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
+import android.app.SearchManager;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -57,9 +58,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.searchmenu, menu);
+
         MenuItem searchViewItem = menu.findItem(R.id.app_bar_search);
 
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchViewItem);
+        final SearchView searchView = (SearchView) searchViewItem.getActionView();
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -72,10 +75,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                Log.i("text",newText);
+                //Log.i("SearchViewnewText",newText);
                 return false;
             }
         });
+
         return super.onCreateOptionsMenu(menu);
     }
 
