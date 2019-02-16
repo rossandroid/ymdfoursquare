@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onChanged(@Nullable final ArrayList<FSPlace> _venues) {
                         if(_venues==null){
-                            setSpinner(true, true, "something was gone wrong. Try again!");
+                            setSpinner(true, true, "Something was gone wrong. Try again!");
 
                         }else {
                             venues.clear();
@@ -78,21 +78,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 searchView.clearFocus();
-
-                setSpinner(true,false,"searching...");
-
+                setSpinner(true,false,"Searching...");
                 c.query(query);
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 venues.clear();
                 va.notifyDataSetChanged();
                 return false;
             }
-
-
         });
 
         return super.onCreateOptionsMenu(menu);
@@ -101,13 +96,13 @@ public class MainActivity extends AppCompatActivity {
     public void setSpinner(boolean show, boolean error, String message){
         if(show){
             list.setVisibility(View.GONE);
-            spinner.setVisibility(View.VISIBLE);
             textSpinner.setVisibility(View.VISIBLE);
             textSpinner.setText(message);
+
             if(error){
-                textSpinner.setVisibility(View.GONE);
+                spinner.setVisibility(View.GONE);
             }else
-                spinner.setIndeterminate(true);
+                spinner.setVisibility(View.VISIBLE);
 
         }else {
             list.setVisibility(View.VISIBLE);

@@ -44,14 +44,11 @@ public class VenueAdapter extends ArrayAdapter<FSPlace> {
 
         image.setColorFilter(mContext.getResources().getColor(R.color.colorFS));
 
-
         venue.setText(fs.name);
         address.setText(fs.formatAddress());
 
         try {
             Picasso.get().load(fs.getIcon()).resize(50, 50) .centerCrop().into(image);
-        } catch (MalformedURLException e) {
-            // catch exception ->  the default image is shown (search lent)
         }catch (IllegalArgumentException ei){
             // catch exception ->  the default image is shown (search lent)
         }

@@ -1,9 +1,5 @@
 package com.ymd.rossellamorgante.ymd.model;
-
-import android.util.Log;
-
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 public class FSPlace {
@@ -14,28 +10,28 @@ public class FSPlace {
 
     public String formatAddress() {
 
-        return location.cc+","+location.city+" "+location.country+" - "+location.postalCode;
+        String fa="";
+        for(String s: location.formattedAddress){
+            fa+=" "+s;
+        }
+        return  fa;
+
+        // If I use API 26 , I will use only the below row
+        //return String.join(" ", location.formattedAddress);
     }
 
-    public String getIcon() throws MalformedURLException {
+    public String getIcon() {
         String url ="";
 
         if(categories.size()>0) {
             url = categories.get(0).icon.prefix+"100"+categories.get(0).icon.suffix;
         }
-        Log.i("Image",url);
         return url;
     }
 
 
     public class Location {
-        public double lat;
-        public double lon;
-        public String postalCode;
-        public String cc;
-        public String city;
-        public String state;
-        public String country;
+        public List<String> formattedAddress;
     }
 
     public class Category {

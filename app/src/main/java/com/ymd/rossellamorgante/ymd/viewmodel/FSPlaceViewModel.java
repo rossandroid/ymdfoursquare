@@ -1,7 +1,6 @@
 package com.ymd.rossellamorgante.ymd.viewmodel;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -18,7 +17,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.ArrayList;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -47,7 +45,7 @@ public class FSPlaceViewModel extends ViewModel {
     }
 
     //Response.Listener<JSONObject> for Venues
-    Response.Listener<JSONObject> onResponse = new Response.Listener<JSONObject>() {
+     Response.Listener<JSONObject> onResponse = new Response.Listener<JSONObject>() {
         @Override
         public void onResponse(JSONObject response) {
             try {
@@ -68,7 +66,4 @@ public class FSPlaceViewModel extends ViewModel {
             venues.setValue(null);
         }
     };
-
-
-
 }
