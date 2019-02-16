@@ -1,4 +1,4 @@
-package com.ymd.rossellamorgante.ymd.view;
+package com.ymd.rossellamorgante.ymd.viewmodel;
 
 import android.content.Context;
 
@@ -48,7 +48,6 @@ public class FSPlaceViewModel extends ViewModel {
         @Override
         public void onResponse(JSONObject response) {
             try {
-
                 Gson gson = new GsonBuilder().create();
                 JSONArray vns = (response.getJSONObject("response")).getJSONArray("venues");
                 FSPlace[] p = gson.fromJson( vns.toString() , FSPlace[].class);
