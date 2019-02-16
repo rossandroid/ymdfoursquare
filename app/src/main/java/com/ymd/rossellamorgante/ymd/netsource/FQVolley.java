@@ -32,7 +32,7 @@ public class FQVolley  {
         queue = Volley.newRequestQueue(_c);
     }
 
-    public void makeSearchUrl(String near,Response.Listener<JSONObject> onResponse) throws IOException{
+    public void makeSearchUrl(String near,Response.Listener<JSONObject> onResponse , Response.ErrorListener onError) throws IOException{
 
         String url = Utils.getProperty("fs_url",_c)+"?"+
                 "client_id="+Utils.getProperty("client_id",_c)+"&"+
@@ -42,16 +42,12 @@ public class FQVolley  {
 
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 onResponse,
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("Error.Response", error.toString());
-                    }
-                }
+                onError
         );
 
         queue.add(getRequest);
     }
+
 
 }
 

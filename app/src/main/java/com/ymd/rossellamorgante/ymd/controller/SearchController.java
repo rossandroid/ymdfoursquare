@@ -1,18 +1,12 @@
 package com.ymd.rossellamorgante.ymd.controller;
 
-import android.app.Activity;
-import android.app.Application;
-import android.content.Context;
-
 import com.ymd.rossellamorgante.ymd.model.FSPlace;
 import com.ymd.rossellamorgante.ymd.viewmodel.FSPlaceViewModel;
 
-import java.util.List;
+import java.util.ArrayList;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 public class SearchController {
@@ -30,7 +24,9 @@ public class SearchController {
         viewModel.search(near);
     }
 
-    public MutableLiveData<List<FSPlace>> bindLiveData(){
+    public MutableLiveData<ArrayList<FSPlace>> bindLiveData(){
         return viewModel.getVenues(c);
     }
+
+
 }
