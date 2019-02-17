@@ -36,38 +36,41 @@ import static org.junit.Assert.assertTrue;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTest {
+public class SearchControllerTest {
 
 
     @Rule
     public ActivityTestRule<MainActivity> mactivity = new ActivityTestRule<>(MainActivity.class);
 
+    @Rule
+    public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
+
     @Test
-    public void searchRightLocation() {
-
-        onView(withId(R.id.app_bar_search))
-                .perform(click())
-                .perform(typeText("Staines") , pressKey(KEYCODE_ENTER));
-
-        SystemClock.sleep(10000);
-
-        onView(withId(R.id.venueList)).check(matches(isDisplayed()));
-
-
+    public void searchRightLocation(){
+        SearchController sc = new SearchController(mactivity.getActivity());
+        sc.bindLiveData().observeForever (
+                new Observer<ArrayList<FSPlace>>() {
+                    @Override
+                    public void onChanged(@Nullable final ArrayList<FSPlace> _venues) {
+                        assertTrue("ok",_venues.size()>0);
+                    }
+                }
+        );
+        sc.query("Staines");
     }
 
     @Test
-    public void searchBadLocation() {
-
-        onView(withId(R.id.app_bar_search))
-                .perform(click())
-                .perform(typeText("addhakdhaskjd") , pressKey(KEYCODE_ENTER));
-
-        SystemClock.sleep(10000);
-
-        onView(withId(R.id.textSpinner))
-                .check(matches(withText("Something was gone wrong. Try again!")));
-
+    public void searchBadLocation(){
+        SearchController sc = new SearchController(mactivity.getActivity());
+        sc.bindLiveData().observeForever (
+                new Observer<ArrayList<FSPlace>>() {
+                    @Override
+                    public void onChanged(@Nullable final ArrayList<FSPlace> _venues) {
+                        assertTrue("ok",_venues==null);
+                    }
+                }
+        );
+        sc.query("Stdadaadadadsaines");
     }
 
 }
