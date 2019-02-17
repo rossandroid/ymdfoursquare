@@ -27,13 +27,14 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    SearchController c;
+    public SearchController c;
     ArrayList<FSPlace> venues;
     ListView list;
     VenueAdapter va;
 
     ProgressBar spinner;
     TextView textSpinner;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.searchmenu, menu);
         MenuItem searchViewItem = menu.findItem(R.id.app_bar_search);
+
         final SearchView searchView = (SearchView) searchViewItem.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
